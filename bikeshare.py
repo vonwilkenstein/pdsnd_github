@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 from datetime import timedelta
 
+#added comment for git project section 3B - second submission
+
+
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -24,51 +27,51 @@ def get_filters():
     days_d = { 'monday':0, 'tuesday':1,'wednesday':2,'thursday':3,'friday':4,'saturday':5,'sunday':6}
 
     print('Hello! Let\'s explore some US bikeshare data!')
-
+    # made input variables more user friendly
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city.lower() not in ['chicago','new_york_city','washington']:
-        user_ip = input('Please choose a city to analyze. Would you like to explore Chicago (chi), New York (nyc), or Washington DC (wdc)?\n')
-        if (user_ip.lower() in ['chicago','chi']):
+        user_input = input('Please choose a city to analyze. Would you like to explore Chicago (chi), New York (nyc), or Washington DC (wdc)?\n')
+        if (user_input.lower() in ['chicago','chi']):
             city = 'chicago'
-        elif (user_ip.lower() in ['new york','nyc','new york city']):
+        elif (user_input.lower() in ['new york','nyc','new york city']):
             city = 'new_york_city'
-        elif (user_ip.lower() in ['washington','wdc','washington dc']):
+        elif (user_input.lower() in ['washington','wdc','washington dc']):
             city = 'washington'
         else:
             print('Something went wrong. City not found, please try again\n')
 
-    user_ip_time_win,user_ip_m,user_ip_d = '','',''
+    user_input_time_window,user_input_month,user_input_day= '','',''
 
     # get user input for month (all, january, february, ... , june)
 
-    while user_ip_time_win.lower() not in ['month', 'day', 'none']:
+    while user_input_time_window.lower() not in ['month', 'day', 'none']:
 
-        user_ip_time_win= input('\nWould you like to filter the data by month, day,'
+        user_input_time_window= input('\nWould you like to filter the data by month, day,'
                             ' or not at all? Type "none" for no time filter.\n')
-        if user_ip_time_win.lower() not in ['month', 'day', 'none']:
+        if user_input_time_window.lower() not in ['month', 'day', 'none']:
             print('Something went wrong. Choice invalid, please try again\n')
 
-    if user_ip_time_win.lower() == 'none':
+    if user_input_time_window.lower() == 'none':
         month = 'all'
         day = 'all'
 
-    elif user_ip_time_win  == 'month':
-        while user_ip_m.lower() not in months_d.keys():
-            user_ip_m = input('\nPlease enter the month you wist to examine..January, February, March, April, May, or June?\n')
-            if user_ip_m.lower() not in months_d.keys():
+    elif user_input_time_window  == 'month':
+        while user_input_month.lower() not in months_d.keys():
+            user_input_month = input('\nPlease enter the month you wist to examine..January, February, March, April, May, or June?\n')
+            if user_input_month.lower() not in months_d.keys():
                 print('Something went wrong. Choice invalid, please try again\n')
             else:
-                month = months_d[user_ip_m.lower()]
+                month = months_d[user_input_month.lower()]
 
 
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     else:
-        while user_ip_d.lower() not in days_d.keys():
-            user_ip_d = input('\nPlease enter a day of the week (Sunday, Monday, ...)\n')
-            if user_ip_d.lower() not in days_d.keys():
+        while user_input_day.lower() not in days_d.keys():
+            user_input_day = input('\nPlease enter a day of the week (Sunday, Monday, ...)\n')
+            if user_input_day.lower() not in days_d.keys():
                 print('Something went wrong. Choice invalid, please try again\n')
-            else: day = days_d[user_ip_d.lower()]
+            else: day = days_d[user_input_day.lower()]
 
     print('-'*40)
 
@@ -151,7 +154,7 @@ def station_stats(df):
     print('Most common end station: ', df['End Station'].mode()[0])
 
     # display most frequent combination of start station and end station trip
-    print('Most common combination of start/end station: ', df['src_dest'].mode()[0])
+    print('Most common trip: ', df['src_dest'].mode()[0])
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -208,28 +211,28 @@ def user_stats(df):
 def raw_dump(df):
     choice = ''
     more =''
-    s = 0
-    e = 5
+    start = 0
+    end = 5
     non_raw = ['day_of_week','month','hour','dayname','monthname','src_dest']
     #drop added columns from raw data
     for name in non_raw:
         df.drop(name,axis=1,inplace=True)
 
     # reset index in case df was filtered
-      
+
     df = df.reset_index(drop=True)
 
     while choice.lower() not in ['yes','no','y','n']:
         choice = input('Would you like to view raw data from this set? (yes, no)\n')
         if (choice.lower() in ['yes','y']):
-            print(df.iloc[s:e])
+            print(df.iloc[start:end])
 
             while more not in ['yes','y']:
                 more = input('Would you like to view more records? (yes, no)\n')
                 if (more in ['yes','y']):
-                    s += 5
-                    e += 5
-                    print(df.iloc[s:e])
+                    start += 5
+                    end += 5
+                    print(df.iloc[start:end])
                     more = ''
 
                 elif (more.lower() in ['no','n']):
