@@ -209,6 +209,10 @@ def user_stats(df):
 
 
 def raw_dump(df):
+    """
+    Function that asks user if they want to see raw data. 5 records are
+    displayed each time a user answer yes. This continues until user answers no
+    """
     choice = ''
     more =''
     start = 0
