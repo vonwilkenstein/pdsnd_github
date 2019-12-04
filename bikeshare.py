@@ -30,7 +30,7 @@ def get_filters():
     # made input variables more user friendly
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city.lower() not in ['chicago','new_york_city','washington']:
-        user_ip = input('Please choose a city to analyze. Would you like to explore Chicago (chi), New York (nyc), or Washington DC (wdc)?\n')
+        user_input = input('Please choose a city to analyze. Would you like to explore Chicago (chi), New York (nyc), or Washington DC (wdc)?\n')
         if (user_input.lower() in ['chicago','chi']):
             city = 'chicago'
         elif (user_input.lower() in ['new york','nyc','new york city']):
@@ -209,6 +209,10 @@ def user_stats(df):
 
 
 def raw_dump(df):
+    """
+    Function that asks user if they want to see raw data. 5 records are
+    displayed each time a user answer yes. This continues until user answers no
+    """
     choice = ''
     more =''
     start = 0
