@@ -9,6 +9,8 @@ Git project submission demonstrating skills learned during version control
 portion of the nanodegree. This is the second run as previous submission
 did not satisfy rubric items.
 
+THIS COMMENT IS ADDED TO SATISFY STEP 3B
+
 ### Files used
 bikeshare.py
 chicago.csv
